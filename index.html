@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Outline SEO — Free Heading Structure Analyzer</title>
+  <meta name="description" content="Analyze the heading structure (H1-H6) of any web page. Free, instant SEO audit tool. Export to Markdown.">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="container nav">
+      <a href="/" class="logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        Outline SEO
+      </a>
+      <div class="nav-links">
+        <a href="/blog/">Blog</a>
+        <a href="/examples/">Examples</a>
+        <a href="/resources/">Resources</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1>Audit your page structure in seconds</h1>
+        <p>Paste any URL and get a complete breakdown of its heading hierarchy — H1 to H6. Spot SEO issues instantly.</p>
+        <div class="analyzer-box">
+          <input type="url" id="urlInput" placeholder="https://example.com/page" autocomplete="off">
+          <button id="analyzeBtn" onclick="analyze()">Analyze</button>
+        </div>
+        <div id="errorBox" class="error-box hidden"></div>
+        <div id="results" class="results hidden">
+          <div class="metrics" id="metrics"></div>
+          <div class="tree" id="tree"></div>
+          <div class="issues" id="issues"></div>
+          <div class="export" id="exportBox"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features">
+      <div class="container grid-3">
+        <div class="feature">
+          <h3>🔍 Instant Scan</h3>
+          <p>Get your heading tree in under 2 seconds. No signup, no limits.</p>
+        </div>
+        <div class="feature">
+          <h3>📊 SEO Metrics</h3>
+          <p>Detect missing H1s, excessive depth, short headings, and more.</p>
+        </div>
+        <div class="feature">
+          <h3>📝 Export Markdown</h3>
+          <p>Copy your outline as clean Markdown for documentation or planning.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 Outline SEO — A free indie tool for content creators & SEOs.</p>
+    </div>
+  </footer>
+
+  <script>
+    async function analyze() {
+      const btn = document.getElementById('analyzeBtn');
+      const url = document.getElementById('urlInput').value.trim();
+      const errorBox = document.getElementById('errorBox');
+      const results = document.getElementById('results');
+
+      if (!url) return;
+
+      btn.disabled = true;
+      btn.textContent = 'Analyzing...';
+      errorBox.classList.add('hidden');
+      results.classList.add('hidden');
+
+      try {
+        const res = await fetch('/api/analyze', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ url }),
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          throw new Error(data.error || 'Analysis failed');
+        }
+
+        // Metrics
+        document.getElementById('metrics').innerHTML = `
+          <h3>Metrics</h3>
+          <div class="metrics-grid">
+            <div class="metric"><strong>${data.metrics.total}</strong><span>Headings</span></div>
+            <div class="metric"><strong>${data.metrics.h1Count}</strong><span>H1 tags</span></div>
+            <div class="metric"><strong>H${data.metrics.maxDepth}</strong><span>Deepest level</span></div>
+            <div class="metric"><strong>${data.metrics.avgTextLength}</strong><span>Avg length</span></div>
+          </div>
+        `;
+
+        // Tree
+        let treeHtml = '<h3>Heading Tree</h3><ul class="heading-tree">';
+        data.headings.forEach(h => {
+          treeHtml += `<li class="level-${h.level}"><span class="badge">H${h.level}</span> ${escapeHtml(h.text)}</li>`;
+        });
+        treeHtml += '</ul>';
+        document.getElementById('tree').innerHTML = treeHtml;
+
+        // Issues
+        if (data.issues.length) {
+          document.getElementById('issues').innerHTML = `
+            <h3>⚠️ Issues Detected</h3>
+            <ul>${data.issues.map(i => `<li>${escapeHtml(i)}</li>`).join('')}</ul>
+          `;
+        } else {
+          document.getElementById('issues').innerHTML = `
+            <h3>✅ Structure Looks Good</h3>
+            <p>No major heading issues detected.</p>
+          `;
+        }
+
+        // Export
+        document.getElementById('exportBox').innerHTML = `
+          <h3>Markdown Export</h3>
+          <textarea readonly rows="8">${escapeHtml(data.exported)}</textarea>
+          <button onclick="copyExport()">Copy to clipboard</button>
+        `;
+
+        results.classList.remove('hidden');
+      } catch (err) {
+        errorBox.textContent = err.message;
+        errorBox.classList.remove('hidden');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Analyze';
+      }
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function copyExport() {
+      const ta = document.querySelector('#exportBox textarea');
+      ta.select();
+      document.execCommand('copy');
+    }
+
+    document.getElementById('urlInput').addEventListener('keydown', e => {
+      if (e.key === 'Enter') analyze();
+    });
+  </script>
+</body>
+</html>

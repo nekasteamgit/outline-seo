@@ -1,0 +1,9 @@
+{
+  "name": "outline-seo",
+  "version": "1.0.0",
+  "description": "Free SEO heading structure analyzer (H1-H6)",
+  "private": true,
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12"
+  }
+}

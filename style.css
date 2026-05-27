@@ -1,0 +1,169 @@
+/* Outline SEO — Minimal clean design */
+
+:root {
+  --bg: #0b0f19;
+  --surface: #111827;
+  --surface-2: #1f2937;
+  --text: #f3f4f6;
+  --text-dim: #9ca3af;
+  --accent: #22d3ee;
+  --accent-dim: #0891b2;
+  --danger: #f87171;
+  --success: #34d399;
+  --radius: 10px;
+  --max-w: 720px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.container { max-width: var(--max-w); margin: 0 auto; padding: 0 1.25rem; }
+
+.site-header {
+  border-bottom: 1px solid var(--surface-2);
+  background: rgba(11,15,25,.8);
+  backdrop-filter: blur(8px);
+  position: sticky; top: 0; z-index: 10;
+}
+
+.nav {
+  display: flex; align-items: center; justify-content: space-between; height: 56px;
+}
+
+.logo {
+  display: flex; align-items: center; gap: .5rem;
+  color: var(--text); text-decoration: none; font-weight: 700; font-size: 1.05rem;
+}
+
+.nav-links a {
+  color: var(--text-dim); text-decoration: none; margin-left: 1.25rem; font-size: .95rem;
+  transition: color .15s;
+}
+.nav-links a:hover { color: var(--text); }
+
+.hero { padding: 3rem 0 2rem; text-align: center; }
+.hero h1 { font-size: 2rem; font-weight: 800; letter-spacing: -.02em; }
+.hero p { color: var(--text-dim); margin-top: .5rem; }
+
+.analyzer-box {
+  display: flex; gap: .5rem; margin-top: 1.5rem; justify-content: center;
+}
+.analyzer-box input {
+  flex: 1; max-width: 420px; padding: .7rem 1rem; border-radius: var(--radius);
+  border: 1px solid var(--surface-2); background: var(--surface); color: var(--text);
+  font-size: 1rem; outline: none;
+}
+.analyzer-box input:focus { border-color: var(--accent); }
+.analyzer-box button {
+  padding: .7rem 1.3rem; border-radius: var(--radius); border: none;
+  background: var(--accent); color: #000; font-weight: 700; cursor: pointer; font-size: 1rem;
+  transition: opacity .15s;
+}
+.analyzer-box button:disabled { opacity: .6; cursor: not-allowed; }
+
+.error-box {
+  margin-top: 1rem; padding: .8rem 1rem; border-radius: var(--radius);
+  background: rgba(248,113,113,.12); color: var(--danger); border: 1px solid rgba(248,113,113,.25);
+}
+
+.results { margin-top: 2rem; text-align: left; }
+.results h3 { font-size: 1.1rem; margin-bottom: .6rem; margin-top: 1.5rem; }
+
+.metrics-grid {
+  display: grid; grid-template-columns: repeat(4,1fr); gap: .75rem;
+}
+.metric {
+  background: var(--surface); border: 1px solid var(--surface-2); border-radius: var(--radius);
+  padding: 1rem; text-align: center;
+}
+.metric strong { display: block; font-size: 1.5rem; color: var(--accent); }
+.metric span { font-size: .8rem; color: var(--text-dim); }
+
+.heading-tree { list-style: none; }
+.heading-tree li {
+  padding: .35rem .6rem; border-radius: 6px; margin-bottom: .25rem;
+  background: var(--surface); border-left: 3px solid var(--accent-dim);
+}
+.heading-tree .level-1 { border-left-color: var(--accent); }
+.heading-tree .level-2 { border-left-color: #a78bfa; }
+.heading-tree .level-3 { border-left-color: #fbbf24; }
+.heading-tree .level-4 { border-left-color: #f87171; }
+.heading-tree .level-5 { border-left-color: #fb923c; }
+.heading-tree .level-6 { border-left-color: #a3a3a3; }
+.badge {
+  display: inline-block; font-size: .7rem; font-weight: 800; text-transform: uppercase;
+  padding: .15rem .4rem; border-radius: 4px; background: var(--surface-2); color: var(--text-dim);
+  margin-right: .5rem;
+}
+
+.issues ul { list-style: none; }
+.issues li {
+  padding: .5rem .7rem; background: rgba(248,113,113,.08); border-radius: 6px;
+  margin-bottom: .35rem; color: var(--danger);
+}
+
+#exportBox textarea {
+  width: 100%; padding: .7rem; border-radius: var(--radius); border: 1px solid var(--surface-2);
+  background: var(--surface); color: var(--text); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  resize: vertical;
+}
+#exportBox button {
+  margin-top: .5rem; padding: .5rem 1rem; border-radius: var(--radius); border: none;
+  background: var(--surface-2); color: var(--text); cursor: pointer; font-size: .9rem;
+}
+
+.features { padding: 2.5rem 0 3rem; border-top: 1px solid var(--surface-2); }
+.grid-3 {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem;
+}
+.feature {
+  background: var(--surface); border: 1px solid var(--surface-2); border-radius: var(--radius);
+  padding: 1.25rem;
+}
+.feature h3 { font-size: 1rem; margin-bottom: .4rem; }
+.feature p { font-size: .9rem; color: var(--text-dim); }
+
+.site-footer {
+  border-top: 1px solid var(--surface-2); padding: 1.5rem 0; text-align: center;
+  color: var(--text-dim); font-size: .85rem;
+}
+
+.hidden { display: none !important; }
+
+/* Case studies */
+.case-study {
+  background: var(--surface); border: 1px solid var(--surface-2); border-radius: var(--radius);
+  padding: 1.25rem; margin-bottom: 1.25rem;
+}
+.case-study h2 { font-size: 1.1rem; margin-bottom: .5rem; }
+.case-study ul { margin: .5rem 0 .5rem 1.2rem; color: var(--text-dim); }
+.case-study p:last-child { margin-top: .75rem; }
+
+/* Responsive */
+@media (max-width: 640px) {
+  .grid-3 { grid-template-columns: 1fr; }
+  .metrics-grid { grid-template-columns: repeat(2,1fr); }
+  .analyzer-box { flex-direction: column; align-items: stretch; }
+}
+
+/* Blog & content pages */
+.content-page { padding: 2rem 0; }
+.content-page h1 { font-size: 1.6rem; margin-bottom: .6rem; }
+.content-page h2 { font-size: 1.2rem; margin: 1.5rem 0 .5rem; }
+.content-page p { color: var(--text-dim); margin-bottom: .8rem; }
+.content-page ul { margin: .5rem 0 1rem 1.2rem; color: var(--text-dim); }
+.content-page a { color: var(--accent); text-decoration: none; }
+.content-page a:hover { text-decoration: underline; }
+.article-list { list-style: none; }
+.article-list li {
+  padding: 1rem; background: var(--surface); border-radius: var(--radius); margin-bottom: .75rem;
+  border: 1px solid var(--surface-2);
+}
+.article-list a { color: var(--text); font-weight: 700; }
+.article-list span { display: block; color: var(--text-dim); font-size: .85rem; margin-top: .25rem; }

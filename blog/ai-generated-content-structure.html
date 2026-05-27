@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Structuring AI-Generated Content — Outline SEO</title>
+  <meta name="description" content="LLMs produce walls of text. A clear heading architecture turns raw output into scannable, indexable pages.">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="container nav">
+      <a href="/" class="logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        Outline SEO
+      </a>
+      <div class="nav-links">
+        <a href="/blog/">Blog</a>
+        <a href="/examples/">Examples</a>
+        <a href="/resources/">Resources</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="content-page">
+    <div class="container">
+      <h1>Structuring AI-Generated Content for Humans and Crawlers</h1>
+      <p>Large language models are great at producing text. They are not great at producing <em>structured</em> text. The output is often a wall of paragraphs with no clear hierarchy.</p>
+
+      <h2>The problem with raw LLM output</h2>
+      <p>Without explicit prompting, most LLMs default to long paragraphs with occasional bold text. They rarely produce proper H2 and H3 sections unless you ask for them. That makes the content hard to scan and harder to index.</p>
+
+      <h2>Headings as a quality signal</h2>
+      <p>A well-structured article with clear headings signals editorial effort. It suggests human curation, even if the sentences were generated. Search engines can not detect AI text reliably, but they <em>can</em> detect structure. Good structure correlates with quality.</p>
+
+      <h2>A simple workflow</h2>
+      <ul>
+        <li>Generate the raw content with your LLM of choice.</li>
+        <li>Extract an outline from the text.</li>
+        <li>Rewrite the outline into proper H2 and H3 headings.</li>
+        <li>Slot the generated paragraphs under the right headings.</li>
+        <li>Trim, merge, or delete sections that do not serve the outline.</li>
+      </ul>
+
+      <h2>Tools that help</h2>
+      <p>Beyond manual editing, you can use an outline extractor or a heading analyzer to verify that the final structure is clean and crawlable. Some tools even export the outline as Markdown for further editing.</p>
+
+      <p><a href="/">Analyze your structure →</a></p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 Outline SEO — A free indie tool for content creators & SEOs.</p>
+    </div>
+  </footer>
+</body>
+</html>
