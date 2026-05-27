@@ -38,7 +38,7 @@ exports.handler = async (event, context) => {
 
     const response = await fetch(url, {
       headers: {
-        'User-Agent': 'Mozilla/5.0 (compatible; OutlineSEO/1.0; +https://outline-seo.netlify.app)',
+        'User-Agent': 'Mozilla/5.0 (compatible; OutlineSEO/1.0; +https://outlineseo.netlify.app)',
       },
       signal: controller.signal,
     });
